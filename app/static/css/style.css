@@ -1,12 +1,12 @@
-/* Tokyo-inspired dark theme */
+/* Tokyo-inspired dark theme with ecological colors */
 :root {
-    --primary-color: #6b3fa0;
-    --secondary-color: #ff4d94;
+    --primary-color: #2a4858;
+    --secondary-color: #4ade80;
     --background-color: #1a1b26;
     --surface-color: #24283b;
-    --text-color: #a9b1d6;
-    --heading-color: #7aa2f7;
-    --accent-color: #bb9af7;
+    --text-color: #d5e1ee;
+    --heading-color: #8ecae6;
+    --accent-color: #34d399;
 }
 
 body {
@@ -63,7 +63,7 @@ main {
 h1 {
     margin: 0;
     font-size: 3.5rem;
-    text-shadow: 0 0 20px var(--secondary-color);
+    text-shadow: 0 0 20px rgba(142, 202, 230, 0.5);
     letter-spacing: 2px;
 }
 
@@ -101,14 +101,14 @@ h2 {
     margin: 0.5rem 0;
     background: rgba(26, 27, 38, 0.8);
     border-radius: 4px;
-    border-left: 4px solid var(--secondary-color);
+    border-left: 4px solid var(--accent-color);
     transition: transform 0.2s ease, border-left-color 0.2s ease;
 }
 
 .services li:hover {
     transform: translateX(10px);
     background: var(--surface-color);
-    border-left-color: var(--accent-color);
+    border-left-color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
