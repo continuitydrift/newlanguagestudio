@@ -36,39 +36,47 @@ const contentSections = {
 };
 
 // Load ratings from localStorage or use defaults
-let contentRatings = JSON.parse(localStorage.getItem('contentRatings')) || {};
+const contentState = JSON.parse(localStorage.getItem('contentState')) || {
+    ratings: {},
+    lovedParagraphs: new Set()
+};
+
+// Session state
+const sessionHiddenParagraphs = new Set();
+const sessionLovedParagraphs = new Set();
+
+// Initialize ratings
 Object.keys(contentSections).forEach(section => {
     contentSections[section].paragraphs.forEach(para => {
-        if (!contentRatings[para.id]) {
-            contentRatings[para.id] = para.rating;
+        if (!contentState.ratings[para.id]) {
+            contentState.ratings[para.id] = para.rating;
         }
     });
 });
 
-// Track hidden paragraphs for current session
-const hiddenParagraphs = new Set();
-
-function saveRatings() {
-    localStorage.setItem('contentRatings', JSON.stringify(contentRatings));
+function saveContentState() {
+    localStorage.setItem('contentState', JSON.stringify({
+        ...contentState,
+        lovedParagraphs: Array.from(contentState.lovedParagraphs)
+    }));
 }
 
 function updateParagraphRating(paraId, increment) {
-    if (!increment && hiddenParagraphs.has(paraId)) {
-        return; // Prevent multiple downvotes in same session
+    if (sessionLovedParagraphs.has(paraId) || sessionHiddenParagraphs.has(paraId)) {
+        return; // Prevent multiple votes in same session
     }
 
-    const currentRating = contentRatings[paraId];
-    const newRating = increment ? 
-        Math.min(currentRating + 1, 6) : 
-        Math.max(currentRating - 1, 1);
+    const currentRating = contentState.ratings[paraId];
     
-    contentRatings[paraId] = newRating;
-    
-    if (!increment) {
-        hiddenParagraphs.add(paraId);
+    if (increment) {
+        contentState.ratings[paraId] = Math.min(currentRating + 1, 6);
+        sessionLovedParagraphs.add(paraId);
+    } else {
+        contentState.ratings[paraId] = Math.max(currentRating - 1, 1);
+        sessionHiddenParagraphs.add(paraId);
     }
     
-    saveRatings();
+    saveContentState();
     updateContent(getCurrentSliderValue());
 }
 
@@ -83,22 +91,30 @@ function updateContent(visibleParagraphs) {
         if (sectionElement) {
             // Sort paragraphs by rating and filter out hidden ones
             const sortedParagraphs = [...section.paragraphs]
-                .filter(para => !hiddenParagraphs.has(para.id))
-                .sort((a, b) => contentRatings[b.id] - contentRatings[a.id])
+                .filter(para => !sessionHiddenParagraphs.has(para.id))
+                .sort((a, b) => contentState.ratings[b.id] - contentState.ratings[a.id])
                 .slice(0, visibleParagraphs);
 
             sectionElement.innerHTML = `
                 <h2>${section.title}</h2>
-                ${sortedParagraphs.map(para => `
-                    <div class="paragraph-container" data-id="${para.id}">
-                        <p>${para.text}</p>
-                        <div class="paragraph-controls">
-                            <span class="rating-display">${contentRatings[para.id]}/6</span>
-                            <button onclick="updateParagraphRating(${para.id}, true)" class="content-btn like-btn">♥</button>
-                            <button onclick="updateParagraphRating(${para.id}, false)" class="content-btn dislike-btn">✕</button>
+                ${sortedParagraphs.map(para => {
+                    const isLoved = sessionLovedParagraphs.has(para.id);
+                    const isHidden = sessionHiddenParagraphs.has(para.id);
+                    return `
+                        <div class="paragraph-container ${isLoved ? 'loved' : ''}" data-id="${para.id}">
+                            <p>${para.text}</p>
+                            <div class="paragraph-controls">
+                                <span class="rating-display">${contentState.ratings[para.id]}/6</span>
+                                <button onclick="updateParagraphRating(${para.id}, true)" 
+                                        class="content-btn like-btn"
+                                        ${isLoved ? 'disabled' : ''}>♥</button>
+                                <button onclick="updateParagraphRating(${para.id}, false)" 
+                                        class="content-btn dislike-btn"
+                                        ${isHidden ? 'disabled' : ''}>✕</button>
+                            </div>
                         </div>
-                    </div>
-                `).join('')}
+                    `;
+                }).join('')}
             `;
         }
     });
@@ -106,6 +122,11 @@ function updateContent(visibleParagraphs) {
 
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', () => {
+    // Convert lovedParagraphs from array to Set if loading from localStorage
+    if (Array.isArray(contentState.lovedParagraphs)) {
+        contentState.lovedParagraphs = new Set(contentState.lovedParagraphs);
+    }
+    
     const slider = document.getElementById('length-slider');
     if (slider) {
         slider.addEventListener('input', (e) => {

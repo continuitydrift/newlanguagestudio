@@ -41,6 +41,10 @@ body {
     transition: all 0.3s ease;
 }
 
+.hero-image.loved {
+    transform: scale(1.05);
+}
+
 .image-controls {
     position: absolute;
     top: 1rem;
@@ -79,6 +83,20 @@ body {
 .image-btn.dislike-btn:hover {
     background: rgba(255, 99, 99, 0.4);
     border-color: #ff6363;
+}
+
+.image-btn:disabled,
+.content-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.image-btn:disabled:hover,
+.content-btn:disabled:hover {
+    background: rgba(36, 40, 59, 0.6);
+    border-color: var(--accent-color);
+    transform: none;
 }
 
 header {
@@ -270,8 +288,24 @@ h2 {
     transition: all 0.3s ease;
 }
 
+.paragraph-container.loved {
+    transform: scale(1.05);
+    padding: 1.2rem;
+    background: rgba(36, 40, 59, 0.4);
+}
+
 .paragraph-container:hover {
     background: rgba(36, 40, 59, 0.5);
+}
+
+.paragraph-container p {
+    margin: 0;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.paragraph-container.loved p {
+    font-size: 1.05em;
 }
 
 .paragraph-controls {
@@ -327,6 +361,12 @@ h2 {
     margin: 2rem 0;
     overflow: hidden;
     border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.section-image-container.loved {
+    transform: scale(1.05);
+    height: 320px;
 }
 
 .section-image {
@@ -348,6 +388,7 @@ h2 {
     top: 1rem;
     right: 1rem;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .section-image-container:hover .image-controls {
