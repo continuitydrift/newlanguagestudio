@@ -11,6 +11,7 @@
         <img src="{{ url_for('static', filename='assets/images/banner.JPG') }}" alt="Hero background" class="hero-image">
         <header>
             <h1>Ecological Text Editing Services</h1>
+            <div id="quote-container" class="quote-section"></div>
         </header>
     </div>
     <main>
@@ -29,5 +30,7 @@
             </ul>
         </section>
     </main>
+    <script src="{{ url_for('static', filename='js/quotes.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/images.js') }}"></script>
 </body>
 </html>

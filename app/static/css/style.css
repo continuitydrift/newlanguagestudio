@@ -38,6 +38,47 @@ body {
     object-fit: cover;
     opacity: 0.6;
     filter: brightness(0.7) contrast(1.2);
+    transition: all 0.3s ease;
+}
+
+.image-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.hero:hover .image-controls {
+    opacity: 1;
+}
+
+.image-btn {
+    background: rgba(36, 40, 59, 0.6);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.image-btn:hover {
+    transform: scale(1.1);
+}
+
+.image-btn.like-btn:hover {
+    background: rgba(74, 222, 128, 0.4);
+    border-color: var(--secondary-color);
+}
+
+.image-btn.dislike-btn:hover {
+    background: rgba(255, 99, 99, 0.4);
+    border-color: #ff6363;
 }
 
 header {
@@ -109,6 +150,62 @@ h2 {
     transform: translateX(10px);
     background: var(--surface-color);
     border-left-color: var(--secondary-color);
+}
+
+.quote-section {
+    margin-top: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1;
+    transform: translateY(0);
+    will-change: opacity, transform;
+}
+
+.quote-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.quote-btn {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.like-btn:hover {
+    background: rgba(74, 222, 128, 0.2);
+    border-color: var(--secondary-color);
+}
+
+.dislike-btn:hover {
+    background: rgba(255, 99, 99, 0.2);
+    border-color: #ff6363;
+}
+
+.emerson-quote {
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    color: var(--text-color);
+    text-shadow: none;
+}
+
+.emerson-quote p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.emerson-quote footer {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {
