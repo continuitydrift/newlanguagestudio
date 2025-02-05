@@ -165,28 +165,38 @@ h2 {
 .quote-actions {
     margin-top: 1rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.quote-actions:hover {
+    opacity: 1;
 }
 
 .quote-btn {
-    background: transparent;
+    background: rgba(36, 40, 59, 0.6);
     border: 1px solid var(--accent-color);
     color: var(--text-color);
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.6rem;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
-.like-btn:hover {
-    background: rgba(74, 222, 128, 0.2);
+.quote-btn:hover {
+    transform: scale(1.1);
+}
+
+.quote-btn.like-btn:hover {
+    background: rgba(74, 222, 128, 0.4);
     border-color: var(--secondary-color);
 }
 
-.dislike-btn:hover {
-    background: rgba(255, 99, 99, 0.2);
+.quote-btn.dislike-btn:hover {
+    background: rgba(255, 99, 99, 0.4);
     border-color: #ff6363;
 }
 
@@ -206,6 +216,142 @@ h2 {
 .emerson-quote footer {
     font-size: 0.9rem;
     opacity: 0.8;
+}
+
+.length-control {
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: var(--accent-color);
+}
+
+.content-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.paragraph-container {
+    position: relative;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(36, 40, 59, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.paragraph-container:hover {
+    background: rgba(36, 40, 59, 0.5);
+}
+
+.paragraph-controls {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.paragraph-container:hover .paragraph-controls {
+    opacity: 1;
+}
+
+.rating-display {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.content-btn {
+    background: rgba(36, 40, 59, 0.6);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.content-btn:hover {
+    transform: scale(1.1);
+}
+
+.content-btn.like-btn:hover {
+    background: rgba(74, 222, 128, 0.4);
+    border-color: var(--secondary-color);
+}
+
+.content-btn.dislike-btn:hover {
+    background: rgba(255, 99, 99, 0.4);
+    border-color: #ff6363;
+}
+
+.section-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 2rem 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.section-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    filter: brightness(0.8) contrast(1.1);
+    transition: all 0.3s ease;
+}
+
+.section-image-container:hover .section-image {
+    opacity: 0.9;
+    filter: brightness(0.9) contrast(1.2);
+}
+
+.section-image-container .image-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+}
+
+.section-image-container:hover .image-controls {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {

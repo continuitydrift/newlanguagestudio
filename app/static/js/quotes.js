@@ -167,8 +167,8 @@ function animateAndDisplayNewQuote() {
                     <footer>— ${author}, <cite>${source}</cite></footer>
                 </blockquote>
                 <div class="quote-actions">
-                    <button onclick="likeQuote()" class="quote-btn like-btn">♥ Love this quote</button>
-                    <button onclick="dislikeQuote()" class="quote-btn dislike-btn">✕ Remove this quote</button>
+                    <button onclick="likeQuote()" class="quote-btn like-btn">♥</button>
+                    <button onclick="dislikeQuote()" class="quote-btn dislike-btn">✕</button>
                 </div>
             `;
             

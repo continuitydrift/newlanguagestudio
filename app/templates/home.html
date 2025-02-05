@@ -18,8 +18,21 @@
         <section class="intro">
             <h2>Professional Editing for Environmental and Ecological Texts</h2>
             <p>Specialized editing services for researchers, writers, and organizations working in environmental science and ecology.</p>
+            
+            <div class="length-control">
+                <label for="length-slider">Story Length:</label>
+                <div class="slider-container">
+                    <span>Short</span>
+                    <input type="range" id="length-slider" min="1" max="6" value="3" class="slider">
+                    <span>Long</span>
+                </div>
+            </div>
         </section>
         
+        <section id="section1" class="content-section"></section>
+        <section id="section2" class="content-section"></section>
+        <section id="section3" class="content-section"></section>
+
         <section class="services">
             <h2>Our Services</h2>
             <ul>
@@ -32,5 +45,6 @@
     </main>
     <script src="{{ url_for('static', filename='js/quotes.js') }}"></script>
     <script src="{{ url_for('static', filename='js/images.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/content.js') }}"></script>
 </body>
 </html>
