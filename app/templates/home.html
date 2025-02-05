@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
         <h1>Ecological Text Editing Services</h1>
     </header>
     <main>
-        <p>Professional editing services for ecological and environmental texts.</p>
+        <section class="intro">
+            <h2>Professional Editing for Environmental and Ecological Texts</h2>
+            <p>Specialized editing services for researchers, writers, and organizations working in environmental science and ecology.</p>
+        </section>
+        
+        <section class="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Academic manuscript editing</li>
+                <li>Environmental report editing</li>
+                <li>Grant proposal review</li>
+                <li>Technical documentation</li>
+            </ul>
+        </section>
     </main>
 </body>
 </html>
